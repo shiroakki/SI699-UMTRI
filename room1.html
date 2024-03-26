@@ -1,0 +1,76 @@
+
+
+
+
+
+<html>
+<head>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-cursor-teleport@1.5.0/dist/aframe-cursor-teleport-component.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="./script.js"></script>
+</head>
+
+
+
+
+<body >
+  <a-scene device-orientation-permission-ui="enabled: false"
+  cursor="rayOrigin: mouse">
+    <a-assets>
+      <a-asset-item id="scene-glb" src="./Models/scene.glb"></a-asset-item>
+ 
+      <img id="welcome" src="./Images/Welcome.png">
+    </a-assets>
+
+    <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable">
+      <a-entity id="head" position="0 1.5 0" camera look-controls="reverseMouseDrag: true" wasd-controls="acceleration:30"></a-entity>
+      <!-- <a-entity laser-controls="hand: left" raycaster="objects: .clickable; far: 100" line="color: red; opacity: 0.75"
+        blink-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity> -->
+      <!-- <a-entity laser-controls="hand: right" raycaster="objects: .clickable" line="color: red; opacity: 0.75"
+        blink-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity> -->
+    </a-entity>
+
+
+    <!-- <a-entity obj-model="obj:#scene-obj; mtl:#scene-mtl" scale="1 1 1" position="0 0 0"></a-entity> -->
+    <a-entity gltf-model="#scene-glb" scale="0.6 0.6 0.6" position="-2 -0.28 4"></a-entity>
+
+
+    <a-entity environment="preset: default"></a-entity>
+
+
+
+
+
+
+
+  </a-scene>
+
+
+<!-- 
+    <div class="uiwrapper" id="welcome">
+      <img class="clickable, uiimage" src="./Images/Welcome.png">
+      <button class="clickable, uibutton" onclick="closePanel()"> START </button>
+    </div> -->
+
+    <div class="container">
+      <input type="checkbox" id="toggle" checked />
+      <label class="button" for="toggle">
+        <nav class="nav">
+          <ul>
+            <li><a href="./index.html"><img src="Images/home.png" width="50%"></a></li>
+            <li><a href="./room1.html"><img src="Images/room.png" width="40%"></a></li>
+            <li><a href="#0"><img src="Images/audio.png" width="40%"></a></li>
+          </ul>
+        </nav>
+      </label>
+    </div>
+
+</body>
+
+
+
+</html>
+
+

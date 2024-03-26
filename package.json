@@ -9,8 +9,8 @@
     "ghpages": "ghpages"
   },
   "devDependencies": {
-    "budo": "^7.0.0",
-    "ghpages": "0.0.3"
+    "budo": "^11.8.4",
+    "ghpages": "^0.0.10"
   },
   "keywords": [
     "aframe",
@@ -19,5 +19,8 @@
     "aframe-scene",
     "webvr",
     "vr"
-  ]
+  ],
+  "dependencies": {
+    "aframe-cursor-teleport-component": "^1.5.0"
+  }
 }

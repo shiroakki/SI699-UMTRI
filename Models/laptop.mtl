@@ -1,0 +1,25 @@
+# Rhino
+newmtl low_poly_interior_175
+Ka 0.0000 0.0000 0.0000
+Kd 0.8000 0.8000 0.8000
+Ks 0.6588 0.6588 0.6588
+Tf 0.0000 0.0000 0.0000
+d 1.0000
+Ns 58.6500
+map_Kd low_poly_10_space_station.png
+newmtl low_poly_interior_174
+Ka 0.0000 0.0000 0.0000
+Kd 0.8000 0.8000 0.8000
+Ks 0.6588 0.6588 0.6588
+Tf 0.0000 0.0000 0.0000
+d 1.0000
+Ns 58.6500
+map_Kd low_poly_10_space_station.png
+newmtl low_poly_interior_170
+Ka 0.0000 0.0000 0.0000
+Kd 0.8000 0.8000 0.8000
+Ks 0.6588 0.6588 0.6588
+Tf 0.0000 0.0000 0.0000
+d 1.0000
+Ns 58.6500
+map_Kd low_poly_10_space_station.png
