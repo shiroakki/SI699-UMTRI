@@ -10,7 +10,7 @@
 
 
 
-<body >
+<body>
   <a-scene device-orientation-permission-ui="enabled: false"
   cursor="rayOrigin: mouse">
     <a-assets>
@@ -42,13 +42,12 @@
   </a-scene>
 
   
-    <div class="uiwrapper">
-      <div id="welcome">
-      <img class="clickable, uiimage" src="./Images/Welcome.png">
-      <button class="uibutton" onclick="closePanel()"> START </button>
+
+      <div id="welcome" class="flex-container">
+        <img class="uiimage" src="./Images/Welcome.png">
+        <button class="clickable uibutton" onclick="closePanel()"> START </button>
       </div>
-      
-    </div>
+
 
   <div class="container">
     <input type="checkbox" id="toggle" checked />
