@@ -21,6 +21,8 @@
     "vr"
   ],
   "dependencies": {
+    "aframe-animation-component": "^5.1.2",
+    "aframe-animation-timeline-component": "^2.0.0",
     "aframe-cursor-teleport-component": "^1.5.0"
   }
 }

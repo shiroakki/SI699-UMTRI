@@ -5,18 +5,23 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-cursor-teleport@1.5.0/dist/aframe-cursor-teleport-component.min.js"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="./script.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
 </head>
 
 
 
 <body >
-  <a-scene device-orientation-permission-ui="enabled: false"
-  cursor="rayOrigin: mouse">
+  <a-scene 
+  device-orientation-permission-ui="enabled: false"
+  cursor="rayOrigin: mouse"
+  animation-timeline__1="timeline: #myTimeline; loop:true"
+  >
     <a-assets>
       <a-asset-item id="scene-glb" src="./Models/room.glb"></a-asset-item>
     <a-asset-item id="strength" src="./Models/strength.glb"></a-asset-item>
     <a-asset-item id="chair" src="./Models/chair.glb"></a-asset-item>
     <a-asset-item id="desktop" src="./Models/desktop.glb"></a-asset-item>
+    <a-asset-item id="human" src="./Models/hand.glb"></a-asset-item>
       <img id="welcome" src="./Images/Welcome.png">
     </a-assets>
 
@@ -35,13 +40,22 @@
 
     <a-entity gltf-model="#chair" scale="0.6 0.6 0.6" position="-2 -0.28 4"></a-entity>
     <a-entity gltf-model="#desktop" scale="0.6 0.6 0.6" position="-3.5 -0.28 4"></a-entity>
+
+
     <a-entity environment="preset: default"></a-entity>
 
+    <a-cone class="clickable" radius-bottom="1" radius-top="0" height="2" position="3 1 -4" color="#FFC65D"
+    shadow="cast:true; receive:true" animation__position="property: position; dur:3000; easing:easeInOutSine; dir:alternate; from:3 1 -4 to 3 2 -4; loop:true" geometry>
+    </a-cone>
 
 
+    <!-- <a-cone color="#F55" radius="0.1"
+    animation__yoyo="property: position; dir: alternate; dur: 1000;
+                     easing: easeInSine; loop: true; to: 1 0 0">
+    </a-cone> -->
 
-
-
+    <a-entity gltf-model="#human" scale="0.2 0.2 0.2" position="4.5 1.4 -1" rotation="0 90 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
+    easing: easeInSine; loop: true; to: 5 1.4 -1"></a-entity>
 
   </a-scene>
 
