@@ -92,14 +92,28 @@ body, html {
 
 
 
-
+.signup-btn {
+    position:absolute;
+    margin-top:90vh;
+    margin-right: 5vh;
+    margin-left:85vw;
+    margin-bottom: 10vh;
+    padding: 10px 20px;
+    border: 1.75px #766AFF solid;
+    background-color: #ffffff; /* Adjust button color as needed */
+    color: #766AFF;
+    border-radius: 20px;
+    cursor: pointer;
+    outline:none;
+    font-size: 16px;
+}
 
 
 
 .nav-container {
     width: 100vw;
     align-items: end;
-    margin: 60px 20vw 0 80%;
+    margin: 60px 20vw 0 80vw;
     justify-content: right;
     align-items: right;
     position: relative;
