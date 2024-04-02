@@ -75,12 +75,12 @@ AFRAME.registerComponent('cursor-teleport', {
     this.teleportIndicator = indicatorRing;
     this.teleportIndicator.visible = false;
 
-    const BOUNDARIES = {
-      minX: -1,
-      maxX: 10,
-      minZ: -7,
-      maxZ:2
-    };
+    // const BOUNDARIES = {
+    //   minX: -1,
+    //   maxX: 10,
+    //   minZ: -7,
+    //   maxZ:2
+    // };
 
     sceneEl.object3D.add(this.teleportIndicator);
 
@@ -303,10 +303,10 @@ AFRAME.registerComponent('cursor-teleport', {
 
 
   teleportTo(pos, quaternion = undefined) {
-    if(pos.x < BOUNDARIES.minX) pos.x = BOUNDARIES.minX;
-    if(pos.x > BOUNDARIES.maxX) pos.x = BOUNDARIES.maxX;
-    if(pos.z < BOUNDARIES.minZ) pos.z = BOUNDARIES.minZ;
-    if(pos.z > BOUNDARIES.maxZ) pos.z = BOUNDARIES.maxZ;
+    // if(pos.x < BOUNDARIES.minX) pos.x = BOUNDARIES.minX;
+    // if(pos.x > BOUNDARIES.maxX) pos.x = BOUNDARIES.maxX;
+    // if(pos.z < BOUNDARIES.minZ) pos.z = BOUNDARIES.minZ;
+    // if(pos.z > BOUNDARIES.maxZ) pos.z = BOUNDARIES.maxZ;
 
     this.teleportIndicator.position.copy(pos);
     if (!quaternion) {
