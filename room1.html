@@ -23,6 +23,7 @@
     <a-asset-item id="scene-glb" src="./Models/room.glb"></a-asset-item>
     <a-asset-item id="jump" src="./Models/jump-latest.glb"></a-asset-item>
     <a-asset-item id="strength" src="./Models/strength.glb"></a-asset-item>
+    <a-asset-item id="figureScan" src="./Models/figureScan.glb"></a-asset-item>
     <a-asset-item id="chair" src="./Models/chair.glb"></a-asset-item>
     <a-asset-item id="desktop" src="./Models/desktop.glb"></a-asset-item>
     <a-asset-item id="step" src="./Models/step.glb"></a-asset-item>
@@ -102,7 +103,6 @@
 
    
 
-    <a-entity gltf-model="#push" scale="0.8 0.8 0.8" position="-0.07 0.2 -2.4" rotation="0 90 0"></a-entity>
 
     <!--Dropdowns-->
     <a-entity position="4.5 2.5 0.2" rotation="0 90 0" scale="0.5 0.5 0.5" id="info-panel-0" visible="false">
@@ -162,6 +162,8 @@
 
 
     <a-entity position="1 1.8 -1.5d" rotation="-5 90 0" scale="0.5 0.5 0.5" id="info-panel-2" visible="false">
+    <a-entity gltf-model="#figureScan" scale="1.3 1.3 1.3" position="2 -2.4 -0.9" rotation="0 180 0"></a-entity>
+
       <a-image src="#task-scan" class="clickable" position="0 0 0"  data-clickable scale="1.8 0.7 0.7"
       ></a-image>
       <a-image src="#purpose-scan" position="0 -0.5 0" scale="1.8 0.4 1"
