@@ -21,169 +21,100 @@
   >
     <a-assets>
     <a-asset-item id="scene-glb" src="./Models/room.glb"></a-asset-item>
-    <a-asset-item id="jump" src="./Models/jump_device.glb"></a-asset-item>
-    <a-asset-item id="strength" src="./Models/strength_latest.glb"></a-asset-item>
-    <a-asset-item id="figureScan" src="./Models/figureScan.glb"></a-asset-item>
+
+    <a-asset-item id="strength" src="./Models/Strength_equipment.glb"></a-asset-item>
+
     <a-asset-item id="chair" src="./Models/chair.glb"></a-asset-item>
     <a-asset-item id="desktop" src="./Models/desktop.glb"></a-asset-item>
     <a-asset-item id="step" src="./Models/step.glb"></a-asset-item>
     <a-asset-item id="push" src="./Models/figurePush.glb"></a-asset-item>
-    <a-asset-item id="jumpFigure" src="./Models/figureJump.glb"></a-asset-item>
-    <a-asset-item id="bodyScan" src="./Models/bodyScanGLB.glb"></a-asset-item>
+
       <img id="welcome" src="./Images/Welcome.png">
-      <img id="task" src="./Images/task.png">
+      <img id="task" src="./Images/task-new.png">
       <img id="purpose" src="./Images/purpose.png">
-      <img id="safety" src="./Images/safety.png">
-      <img id="safety-exp" src="./Images/safety-exp.png">
+      <img id="safety" src="./Images/equipment.png">
+      <img id="safety-exp" src="./Images/equipment-exp.png">
       <img id="purpose-exp" src="./Images/purpose-exp.png">
       <img id="indicator" src="./Images/indicator.png">
-      <img id="task-jump" src="./Images/task-jump.png">
-      <img id="purpose-jump" src="./Images/purpose-jump.png">
-      <img id="safety-jump" src="./Images/safety-jump.png">
-      <img id="safety-jump-exp" src="./Images/safety-jump-exp.png">
-      <img id="purpose-jump-exp" src="./Images/purpose-jump-exp.png">
-      <img id="task-scan" src="./Images/task-scan.png">
-      <img id="purpose-scan" src="./Images/purpose-scan.png">
-      <img id="safety-scan" src="./Images/safety-scan.png">
-      <img id="safety-scan-exp" src="./Images/safety-scan-exp.png">
-      <img id="purpose-scan-exp" src="./Images/purpose-scan-exp.png">
-      <img id="ring-glow" src="./Images/ring-glow.png">
+
+      <img id="ring-glow" src="./Images/ring-glow.png">d
     </a-assets>
 
-    <a-entity light="type: ambient; color: #9af9; intensity: 0.2" position="-1 4.6 3.7"></a-entity>
-    <a-entity light="type: ambient; color: #fff; intensity: 0.3" position="-2.7 3 -7"></a-entity>
-    <a-entity light="type: point; color: #dec995; intensity: 0.7" position="0 3 0"></a-entity>
+    <!-- <a-entity light="type: ambient; color: #9af9; intensity: 0.2" position="-1 4.6 3.7"></a-entity> -->
+    <a-entity light="type: ambient; color: #fff; intensity: 0.5" position="7.84 5 -8" id="ambient-1"></a-entity>
+    <a-entity light="type: point; color: #ffdba8; intensity: 0.35" position="2.55 2.1 -2.6" id="point-light-front"></a-entity>
+    <a-entity light="type: point; color: #dec995; intensity: 0.3" position="11.63 3.88 -3" angle="30" id="point-light"></a-entity>
+    <a-entity light="type: point; color: #725181; intensity: 0.19" position="12.23 2.88 -2" angle="30" id="point-light-left"></a-entity>
+    <a-entity light="type: directional; color: #fad6ff; intensity: 0.19" position="10.23 2.88 -6" angle="30" id="point-light-right"></a-entity>
 
-    <a-entity gltf-model="#scene-glb" scale="1 1 1" position="-2.25 -0.5 4.8"></a-entity>
-    <a-entity gltf-model="#strength" scale="0.6 0.6 0.6" position="-0.73 -0.28 1.3" rotation="0 0 0" id="#newId"></a-entity>
-    <a-entity gltf-model="#step" scale="0.6 0.6 0.6" position="3.24 -1 -14.4" rotation="0 180 0"></a-entity>
-    <a-entity gltf-model="#bodyScan" scale="40 40 40" position="0.5 0 -1.5" rotation="0 90 0"></a-entity>
-
-    <a-entity gltf-model="#chair" scale="0.6 0.6 0.6" position="-2 -0.28 4"></a-entity>
-    <a-entity gltf-model="#desktop" scale="2 2 2" position="10 -0.39 -5" rotation="-90 0 0"></a-entity>
+    <a-entity gltf-model="#scene-glb" scale="1 1 1" position="-2.25 -0.5 4.8" rotation="0 0 0"></a-entity>
+    <a-entity gltf-model="#step" scale="0.8 0.8 0.8" position="3.24 -1 -18.4" rotation="0 180 0"></a-entity>
 
 
+    <a-entity gltf-model="#chair" scale="0.6 0.6 0.6" position="-2 -0.28 4.35"></a-entity>
+    <a-entity gltf-model="#desktop" scale="2.4 2.4 2.4" position="11.79 -0.39 -7.44" rotation="-90 90 0"></a-entity>
+    <!-- <a-entity environment="preset: default"></a-entity> -->
+
+    <a-entity geometry="primitive:plane" position="0 9.52 0" rotation="90 0 0" scale="100 100 100" id="roof" material="color:#dbe6ff; emissive:#4d4c4c" ></a-entity>
 
     <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable" effect-manager>
       <a-entity id="head" position="-1 2.5 3" camera 
       rotation="0 -45 0"
       look-controls="mouse:reverse-drag" 
       wasd-controls="acceleration:30" 
-      proximity-effect="targets: #ring-strength, #ring-jump, #ring-scan; threshold: 1.5; infoPanels:#info-panel-0, #info-panel-1, #info-panel-2"
-      restrict-movement="minX: -1; maxX: 10; minZ: -7; maxZ: 2">
+      proximity-effect="targets: #ring-strength; threshold: 1.5; infoPanels:#info-panel-0"
+      restrict-movement="minX: -1; maxX: 14; minZ: -7; maxZ: 4">
         <a-cylinder id="effects" position="0 -2 0" height="10" radius="4" color=#000000"
                         material="opacity: 0.4; side: double;" visible="false"></a-cylinder>
       </a-entity>
     </a-entity>
 
 
-    <!-- targets -->
-
-    <a-image src="#ring-glow" position="5.9 0.011 -1.05" rotation="-90 0 0" scale="12 12 12"
+    <!-- strength -->
+    <a-image src="#ring-glow" position="7.84 0.011 -2.95" rotation="-90 0 0" scale="12 12 12"
     class="clickable" 
     id="ring-strength"
     ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 90" position="0 0.001 0"> </a-image> </a-image>
+  
+
+<a-entity id="strength-parent" position="2.85 0 -2.09">
 
 
-    <a-image src="#ring-glow" position="6.5 0.012 -6.05" rotation="-90 0 0" scale="12 12 12"
-    class="clickable" 
-    id="ring-jump"
-    ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 0" position="0 0.001 0"> </a-image> </a-image>
+  <a-entity gltf-model="#strength" scale="3.5 3.5 3.5" position="-4.09 -1.05 6.9" rotation="0 180 0" id="#strength-device"></a-entity>
 
+  <a-entity position="4.5 2.5 0.2" rotation="0 90 0" scale="0.5 0.5 0.5" id="info-panel-0" visible="false">
+    <a-entity gltf-model="#push" scale="1.6 1.6 1.6" position="2.12 -5 -0.25" rotation="0 -180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
+  easing: easeInSine; loop: true; to: 2 -5 1"></a-entity>
 
-    <a-image src="#ring-glow" position="1.2 0.013 -2.3" rotation="-90 0 0" scale="12 12 12"
-    class="clickable" 
-    id="ring-scan"
-    ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 90" position="0 0.002 0"> </a-image> </a-image>
-
-
-
-
-
-    <a-entity gltf-model="#jump" scale="0.09 0.09 0.09" position="5.54 -0.39 -9.5" rotation="0 -90 0"></a-entity>
-
-
-    <!--Figure + Dropdowns-->
-    <a-entity position="4.5 2.5 0.2" rotation="0 90 0" scale="0.5 0.5 0.5" id="info-panel-0" visible="false">
-      <a-entity gltf-model="#push" scale="1.6 1.6 1.6" position="2 -5 -0.05" rotation="0 -180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
-    easing: easeInSine; loop: true; to: 2 -5 1"></a-entity>
-
-      <a-image src="#task" class="clickable" position="0 0 0" id="task1" data-clickable scale="1.8 0.7 0.7"
-      ></a-image>
-      <a-image src="#purpose" position="0 -0.5 0" scale="1.8 0.4 1"
-      data-clickable id="purpose1" class="clickable"
-      onclick="toggleDropdown('purpose1', 'purpose2', 'safety1')"
-      event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
-      event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"
-      ></a-image>
-
-      <a-image src="#safety"  position="0 -0.9 0" scale="1.8 0.4 1"
-      data-clickable id="safety1" class="clickable"
-      onclick="toggleDropdown('safety1', 'safety2', 'none')"
-      event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
-      event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"></a-image>
-
-      <a-image src="#purpose-exp" id="purpose2" class="clickable" position="0 -0.65 0" scale="1.8 0.7 1" visible="false" 
+    <a-image src="#task" class="clickable" position="0 0 0" id="task1" data-clickable scale="1.8 0.7 0.7"
     ></a-image>
-      <a-image src="#safety-exp" id="safety2" class="clickable" position="0 -1.2 0" scale="1.8 0.7 1" visible="false"
+    <a-image src="#purpose" position="0 -0.5 0" scale="1.8 0.4 1"
+    data-clickable id="purpose1" class="clickable"
+    onclick="toggleDropdown('purpose1', 'purpose2', 'safety1')"
+    event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
+    event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"
     ></a-image>
-    </a-entity>
-    <a-image src="#purpose" id="none" visible="false"></a-image>
+
+    <a-image src="#safety"  position="0 -0.9 0" scale="1.8 0.4 1"
+    data-clickable id="safety1" class="clickable"
+    onclick="toggleDropdown('safety1', 'safety2', 'none')"
+    event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
+    event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"></a-image>
+
+    <a-image src="#purpose-exp" id="purpose2" class="clickable" position="0 -0.65 0" scale="1.8 0.7 1" visible="false" 
+  ></a-image>
+    <a-image src="#safety-exp" id="safety2" class="clickable" position="0 -1.2 0" scale="1.8 0.7 1" visible="false"
+  ></a-image>
+  </a-entity>
+  <a-image src="#purpose" id="none" visible="false"></a-image>
+
+</a-entity>
 
 
 
-    <a-entity position="5.5 1.8 -7" rotation="-5 0 0" scale="0.5 0.5 0.5" id="info-panel-1" visible="false">
-      <a-entity gltf-model="#jumpFigure" scale="1.6 1.6 1.6" position="2.2 -3.5 0" rotation="0 180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
-      easing: easeInSine; loop: true; to:2.2 -1.5 0"></a-entity>
 
 
-      <a-image src="#task-jump" class="clickable" position="0 0 0" id="task1" data-clickable scale="1.8 0.7 0.7"
-      ></a-image>
-      <a-image src="#purpose-jump" position="0 -0.5 0" scale="1.8 0.4 1"
-      data-clickable id="purpose1-jump" class="clickable"
-      onclick="toggleDropdown('purpose1-jump', 'purpose2-jump', 'safety1-jump')"
-      event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
-      event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"
-      ></a-image>
 
-      <a-image src="#safety-jump"  position="0 -0.9 0" scale="1.8 0.4 1"
-      data-clickable id="safety1-jump" class="clickable"
-      onclick="toggleDropdown('safety1-jump', 'safety2-jump', 'none')"
-      event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
-      event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"></a-image>
-
-      <a-image src="#purpose-jump-exp" id="purpose2-jump" class="clickable" position="0 -0.65 0" scale="1.8 0.7 1" visible="false" 
-    ></a-image>
-      <a-image src="#safety-jump-exp" id="safety2-jump" class="clickable" position="0 -1.2 0" scale="1.8 0.7 1" visible="false"
-    ></a-image>
-    </a-entity>
-    <a-image src="#purpose" id="none" visible="false"></a-image>
-
-
-    <a-entity position="1 1.8 -1.5d" rotation="-5 90 0" scale="0.5 0.5 0.5" id="info-panel-2" visible="false">
-    <a-entity gltf-model="#figureScan" scale="1.3 1.3 1.3" position="2 -2.4 -0.9" rotation="0 180 0"></a-entity>
-
-      <a-image src="#task-scan" class="clickable" position="0 0 0"  data-clickable scale="1.8 0.7 0.7"
-      ></a-image>
-      <a-image src="#purpose-scan" position="0 -0.5 0" scale="1.8 0.4 1"
-      data-clickable id="purpose1-scan" class="clickable"
-      onclick="toggleDropdown('purpose1-scan', 'purpose2-scan', 'safety1-scan')"
-      event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
-      event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"
-      ></a-image>
-
-      <a-image src="#safety-scan"  position="0 -0.9 0" scale="1.8 0.4 1"
-      data-clickable id="safety1-scan" class="clickable"
-      onclick="toggleDropdown('safety1-scan', 'safety2-scan', 'none')"
-      event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
-      event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"></a-image>
-
-      <a-image src="#purpose-scan-exp" id="purpose2-scan" class="clickable" position="0 -0.65 0" scale="1.8 0.7 1" visible="false" 
-    ></a-image>
-      <a-image src="#safety-scan-exp" id="safety2-scan" class="clickable" position="0 -1.2 0" scale="1.8 0.7 1" visible="false"
-    ></a-image>
-    </a-entity>
-    <a-image src="#purpose" id="none" visible="false"></a-image>
 
 
 
@@ -218,7 +149,7 @@
   <div id="studies-detail" class="studies-info" style="display: none;">
     <h4>EXPLORE OTHER STUDIES</h4>
     <a href="#0" class="study-link">Strength Study</a>
-    <a href="#0" class="study-link">Size and Shape Study</a>
+    <a href="./room_bodyshape.html" class="study-link">Size and Shape Study</a>
   </div>
 
 <!-- <div class="signup-btn">
@@ -372,67 +303,6 @@
           this.el.setAttribute('position', position);
         }
       });
-
-
-      AFRAME.registerComponent('kbd-look-controls', {
-        schema: {
-            speed: {type: 'number', default: 2}
-        },
-    
-        init: function () {
-            this.bindFunctions();
-            this.addEventListeners();
-            this.keyPressed = {
-                'ArrowUp': false,
-                'ArrowDown': false,
-                'ArrowLeft': false,
-                'ArrowRight': false
-            }
-        },
-    
-        remove: function () {
-            this.removeEventListeners();
-        },
-    
-        tick: function(time, delta) {
-            var data = this.data;
-            var object3D = this.el.object3D;
-    
-            const angleDelta = 0.01 * data.speed * (delta / 16);
-    
-
-            if (this.keyPressed['ArrowLeft']) {
-                object3D.rotation.y = object3D.rotation.y + angleDelta;
-            }
-            if (this.keyPressed['ArrowRight']) {
-                object3D.rotation.y = object3D.rotation.y - angleDelta;
-            }
-        },
-    
-        bindFunctions() {
-            this.onKeyUp = this.onKeyUp.bind(this);
-            this.onKeyDown = this.onKeyDown.bind(this);
-        },
-    
-        addEventListeners() {
-            window.addEventListener('keydown', this.onKeyDown);
-            window.addEventListener('keyup', this.onKeyUp);
-        },
-    
-        removeEventListeners() {
-            window.removeEventListener('keydown', this.onKeyDown);
-            window.removeEventListener('keyup', this.onKeyUp);
-        },
-    
-        onKeyUp: function (evt) {
-            this.keyPressed[evt.code] = false;
-        },
-    
-        onKeyDown: function (evt) {
-            this.keyPressed[evt.code] = true;
-        }
-    
-    })
 
 
 

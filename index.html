@@ -19,8 +19,8 @@
   cursor="rayOrigin: mouse">
     <a-assets>
     
-    <a-asset-item id="lobby" src="./Models/room_modify.glb"></a-asset-item>
-      <img id="welcome" src="./Images/Welcome.png">
+    <a-asset-item id="lobby" src="./Models/Hallway.glb"></a-asset-item>
+      <img id="welcome" src="./Images/nav-tips.png">
       <img id="footprint" src="./Images/footprint-new.png">
       <img id="ring-glow" src="./Images/ringGlow.png">
     </a-assets>
@@ -43,7 +43,7 @@
     </a-entity>
 
 
-    <a-entity gltf-model="#lobby" scale="2.5 2.5 2.5" position="-17 1 -21" rotation="0 180 0"> 
+    <a-entity gltf-model="#lobby" scale="2.5 2.5 2.5" position="2 1 10" rotation="0 180 0"> 
 
       
     </a-entity>
@@ -56,10 +56,10 @@
     <a-image src="#footprint" position="-3 0 -2" rotation="0 10 0" scale="0.5"> </a-image>
   </a-image> -->
   
-  <a-image src="#ring-glow" position="-20 0.3 -18.5" rotation="90 0 0" scale="15 15 15"
+  <!-- <a-image src="#ring-glow" position="-20 0.3 -18.5" rotation="90 0 0" scale="15 15 15"
   class="clickable" 
   id="teleport-ring"
-  > </a-image>
+  > </a-image> -->
 
 
     
@@ -93,7 +93,12 @@
 <div id="studies-detail" class="studies-info" style="display: none;">
   <h4>EXPLORE OTHER STUDIES</h4>
   <a href="./room1.html" class="study-link">Strength Study</a>
-  <a href="./room-body.html" class="study-link">Size and Shape Study</a>
+  <a href="./room_bodyshape.html" class="study-link">Size and Shape Study</a>
+</div>
+
+
+<div id="loading-screen" style="position: absolute; width: 100%; height: 100%; background: black; color: white; display: flex; justify-content: center; align-items: center; z-index: 10;">
+  <div id="loading-text">Loading... 0%</div>
 </div>
 
 <div class="container" id="panel-1">
@@ -114,7 +119,7 @@
 
   
 
-
+  <script src="app.js"></script>
   <script>
     function closePanel(panelId) {
         document.getElementById(panelId).style.display = "none";

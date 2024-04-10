@@ -1,0 +1,354 @@
+<html>
+<head>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-cursor-teleport@1.5.0/dist/aframe-cursor-teleport-component.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="./styles.css"> -->
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+  <!-- <script src="../scripts/script.js"></script> -->
+
+</head>
+
+
+
+
+<body>
+
+
+  <a-scene device-orientation-permission-ui="enabled: false"
+  cursor="rayOrigin: mouse">
+    <a-assets>
+    
+    <a-asset-item id="room" src="./Models/room-bodyshape.glb"></a-asset-item>
+    <a-asset-item id="jump" src="./Models/JUMP_CLEARED.glb"></a-asset-item>
+    <a-asset-item id="desktop" src="./Models/desktop.glb"></a-asset-item>
+
+    <a-asset-item id="figureScan" src="./Models/figureScan.glb"></a-asset-item>
+
+    <a-asset-item id="desktop" src="./Models/desktop.glb"></a-asset-item>
+
+    <a-asset-item id="jumpFigure" src="./Models/figureJump.glb"></a-asset-item>
+    <a-asset-item id="bodyScan" src="./Models/bodyScanGLB.glb"></a-asset-item>
+      <img id="indicator" src="./Images/indicator.png">
+      <img id="task-jump" src="./Images/task-jump.png">
+      <img id="purpose-jump" src="./Images/purpose-jump.png">
+      <img id="safety-jump" src="./Images/safety-jump.png">
+      <img id="safety-jump-exp" src="./Images/safety-jump-exp.png">
+      <img id="purpose-jump-exp" src="./Images/purpose-jump-exp.png">
+      <img id="task-scan" src="./Images/task-scan.png">
+      <img id="purpose-scan" src="./Images/purpose-scan.png">
+      <img id="safety-scan" src="./Images/safety-scan.png">
+      <img id="safety-scan-exp" src="./Images/safety-scan-exp.png">
+      <img id="purpose-scan-exp" src="./Images/purpose-scan-exp.png">
+      <img id="ring-glow" src="./Images/ring-glow.png">
+
+    </a-assets>
+
+
+
+    <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable" effect-manager>
+      <a-entity id="head" position="0 2.5 0" camera 
+      rotation="0 0 0"
+      look-controls="mouse:reverse-drag" 
+      wasd-controls="acceleration:30" 
+      proximity-effect="targets: #ring-strength, #ring-jump, #ring-scan; threshold: 1.5; infoPanels:#info-panel-0, #info-panel-1, #info-panel-2"
+      >
+        <a-cylinder id="effects" position="0 -2 0" height="10" radius="4" color=#000000" rotation="0 0 0"
+                        material="opacity: 0.4; side: double;" visible="false"></a-cylinder>
+      </a-entity>
+    </a-entity>
+
+    <a-entity gltf-model="#desktop" scale="2.4 2.4 2.4" position="8.79 -0.39 -3.54" rotation="-90 0 0"></a-entity>
+
+    <a-entity gltf-model="#room" scale="35 35 35" position="29.15 -0.09 -12" rotation="0 0 0"></a-entity>
+
+        <!-- jump -->
+
+        <a-entity id="jump-parent" position="-1.47 0.86 -0.92">
+          <a-image src="#ring-glow" position="6.5 -0.48 -6.44" rotation="-90 0 0" scale="12 12 12"
+          class="clickable" 
+          id="ring-jump"
+          ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 0" position="0 0.001 0"> </a-image> </a-image>
+      
+      
+          <a-entity gltf-model="#jump" scale="0.09 0.09 0.09" position="5.54 -0.39 -9.5" rotation="0 -90 0"></a-entity>
+          <a-entity position="5.5 1.8 -7" rotation="-5 0 0" scale="0.5 0.5 0.5" id="info-panel-1" visible="false">
+            <a-entity gltf-model="#jumpFigure" scale="1.6 1.6 1.6" position="2.2 -3.5 0" rotation="0 180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
+            easing: easeInSine; loop: true; to:2.2 -1.5 0"></a-entity>
+      
+      
+            <a-image src="#task-jump" class="clickable" position="0 0 0" id="task1" data-clickable scale="1.8 0.7 0.7"
+            ></a-image>
+            <a-image src="#purpose-jump" position="0 -0.5 0" scale="1.8 0.4 1"
+            data-clickable id="purpose1-jump" class="clickable"
+            onclick="toggleDropdown('purpose1-jump', 'purpose2-jump', 'safety1-jump')"
+            event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
+            event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"
+            ></a-image>
+      
+            <a-image src="#safety-jump"  position="0 -0.9 0" scale="1.8 0.4 1"
+            data-clickable id="safety1-jump" class="clickable"
+            onclick="toggleDropdown('safety1-jump', 'safety2-jump', 'none')"
+            event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
+            event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"></a-image>
+      
+            <a-image src="#purpose-jump-exp" id="purpose2-jump" class="clickable" position="0 -0.65 0" scale="1.8 0.7 1" visible="false" 
+          ></a-image>
+            <a-image src="#safety-jump-exp" id="safety2-jump" class="clickable" position="0 -1.2 0" scale="1.8 0.7 1" visible="false"
+          ></a-image>
+          </a-entity>
+          <a-image src="#purpose" id="none" visible="false"></a-image>
+        </a-entity>
+    
+    
+    <!-- scan -->
+    
+        <a-entity id="scan-parent" position="-0.63 0.45 -2" rotation="0 0 0">
+          <a-image src="#ring-glow" position="1.45 0.008 -2.6" rotation="-90 0 0" scale="12 12 12"
+          class="clickable" 
+          id="ring-scan"
+          ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 90" position="0 0.002 0"> </a-image> </a-image>
+    
+    
+          <a-entity gltf-model="#bodyScan" scale="40 40 40" position="0.5 0 -1.5" rotation="0 90 0"></a-entity>
+    
+          <a-entity position="1 1.8 -1.5" rotation="-5 90 0" scale="0.5 0.5 0.5" id="info-panel-2" visible="false">
+            <a-entity gltf-model="#figureScan" scale="1.3 1.3 1.3" position="2 -2.4 -0.9" rotation="0 180 0"></a-entity>
+        
+              <a-image src="#task-scan" class="clickable" position="0 0 0"  data-clickable scale="1.8 0.7 0.7"
+              ></a-image>
+              <a-image src="#purpose-scan" position="0 -0.5 0" scale="1.8 0.4 1"
+              data-clickable id="purpose1-scan" class="clickable"
+              onclick="toggleDropdown('purpose1-scan', 'purpose2-scan', 'safety1-scan')"
+              event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
+              event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"
+              ></a-image>
+        
+              <a-image src="#safety-scan"  position="0 -0.9 0" scale="1.8 0.4 1"
+              data-clickable id="safety1-scan" class="clickable"
+              onclick="toggleDropdown('safety1-scan', 'safety2-scan', 'none')"
+              event-set__enter="_event: mouseenter;  width: 0.53; height: 0.53;"
+              event-set__leave="_event: mouseleave;  width: 0.5; height: 0.5;"></a-image>
+        
+              <a-image src="#purpose-scan-exp" id="purpose2-scan" class="clickable" position="0 -0.65 0" scale="1.8 0.7 1" visible="false" 
+            ></a-image>
+              <a-image src="#safety-scan-exp" id="safety2-scan" class="clickable" position="0 -1.2 0" scale="1.8 0.7 1" visible="false"
+            ></a-image>
+            </a-entity>
+            <a-image src="#purpose" id="none" visible="false"></a-image>
+        </a-entity>
+    
+    
+
+
+
+    
+  </a-scene>
+
+
+
+<!-- <div class="overlay" id="overlay"></div> -->
+
+<div class="nav-container">
+  <input type="checkbox" id="toggle" checked />
+  <label class="button" for="toggle">
+    <nav class="nav">
+      <ul>
+        <li><a href="./index.html"><img src="Images/home-new.png" width="50%">
+        <button class="tooltip"> HOME </button>
+        </a></li>
+        <!-- <li><a href="./room1.html"><img src="Images/menu-new.png" width="50%"></a></li> -->
+        <li><a id="studies-button" href="#"><img src="Images/menu-new.png" width="50%">
+          <button class="tooltip"> STUDIES </button>
+        
+        </a> </li>
+        <li><a href="#0"><img src="Images/audio.png" width="40%">
+          <button class="tooltip"> AUDIO </button>
+        </a></li>
+      </ul>
+    </nav>
+  </label>
+</div>
+
+<div id="studies-detail" class="studies-info" style="display: none;">
+  <h4>EXPLORE OTHER STUDIES</h4>
+  <a href="./room1.html" class="study-link">Strength Study</a>
+  <a href="./room-body.html" class="study-link">Size and Shape Study</a>
+</div>
+
+<!-- <div class="container" id="panel-1">
+    <img src="Images/umtri.png" class="tutorial">
+    <div class="welcome-text">
+        Welcome to the University of Michigan Transportation Research Institute! Here you can explore the lab space and find out how biosciences research studies are conducted!
+    </div>
+    <button class="start-button" onclick="closePanel('panel-1'); closePanel('overlay'); openPanel('infoPanel')"> Enter Space </button>
+</div>
+
+
+
+<div id="infoPanel" class="flex-container">
+  <img class="tutorial" src="./Images/Welcome.png">
+  <button class="clickable start-button" onclick="closePanel('infoPanel')"> Try it now </button>
+</div> -->
+
+
+  
+
+
+  <script>
+    function closePanel(panelId) {
+        document.getElementById(panelId).style.display = "none";
+    }
+
+    function openPanel(panelId) {
+        document.getElementById(panelId).style.display = "flex";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the A-Frame element
+      var teleportRing = document.querySelector('#teleport-ring');
+  
+      // Add an event listener for the 'click' event
+      teleportRing.addEventListener('click', function() {
+        // Navigate to the new URL
+        window.location.href = './room1.html';
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var studiesButton = document.getElementById('studies-button'); // The button to toggle the studies detail
+      var studiesDetail = document.getElementById('studies-detail'); // The container for the studies links
+      
+      studiesButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default anchor action
+        var isHidden = studiesDetail.style.display === 'none';
+        studiesDetail.style.display = isHidden ? 'block' : 'none';
+      });
+    });
+
+  AFRAME.registerComponent('proximity-effect',{
+    schema:{
+      targets:{type:'array'},
+      threshold:{type:'number',default:1},
+      infoPanels: { type: 'array'}
+
+    },
+    init: function() {
+      // Convert target selectors into actual elements
+      this.targets = this.data.targets.map(selector => document.querySelector(selector)).filter(el => el !== null);
+      // Convert infoPanel selectors into actual elements
+      this.infoPanels = this.data.infoPanels.map(selector => document.querySelector(selector)).filter(el => el !== null);
+      this.threshold = this.data.threshold;
+      this.lastActiveIndex = -1; // Keep track of the last active target
+      this.effectActive=false;
+
+    },
+    tick: function() {
+      var cameraRigPosition = this.el.object3D.position;
+      var activeIndex = -1;
+  
+      // Check each target's distance and determine the active one
+      this.targets.forEach((target, index) => {
+        if (!target) return; // Continue if target is not a valid element
+  
+        var targetPosition = target.object3D.position;
+        var distanceXZ = Math.sqrt(
+          Math.pow(cameraRigPosition.x - targetPosition.x, 2) + 
+          Math.pow(cameraRigPosition.z - targetPosition.z, 2)
+        );
+  
+        if (distanceXZ <= this.threshold) {
+          activeIndex = index;
+        }
+      });
+  
+      // Hide the last active info panel if any
+      if (this.lastActiveIndex !== -1 && this.infoPanels[this.lastActiveIndex]) {
+        this.infoPanels[this.lastActiveIndex].setAttribute('visible', false);
+        this.el.querySelector('#effects').setAttribute('visible',false);
+        this.effectActive=false;
+
+      }
+  
+      // Show the new active info panel if any
+      if (activeIndex !== -1 && this.infoPanels[activeIndex]) {
+        this.infoPanels[activeIndex].setAttribute('visible', true);
+        this.effectActive=true;
+        this.el.querySelector('#effects').setAttribute('visible',true);
+
+      }
+  
+      // Update the last active index
+      this.lastActiveIndex = activeIndex;
+    }
+
+  });
+
+
+
+  function toggleDropdown(toggleId, contentId, nextId) {
+    var contentEl = document.getElementById(contentId);
+    var nextEl = document.getElementById(nextId);
+    var contentVisible = contentEl.getAttribute('visible');
+    var toggleEl = document.getElementById(toggleId);
+    // Toggle visibility of the content element
+    contentEl.setAttribute('visible', !contentVisible);
+  
+    // Reset position of the next element to its original state before adjusting
+    var originalPositionY = nextEl.getAttribute('data-original-position-y');
+    if (originalPositionY === null) {
+      // Store the original position y if it's not stored yet
+      originalPositionY = nextEl.getAttribute('position').y-0.2;
+      nextEl.setAttribute('data-original-position-y', originalPositionY);
+    } else {
+      // Reset the position to the original position before any toggles
+      nextEl.setAttribute('position', { x: nextEl.getAttribute('position').x, y: originalPositionY, z: nextEl.getAttribute('position').z });
+    }
+    
+    // Adjust position based on the visibility of the content element
+    var deltaY = contentVisible ? 0.25 : -0.1; // The height of the dropdown content
+    var newPosY = parseFloat(originalPositionY) + deltaY;
+  
+    // Set the new position for the next element
+    nextEl.setAttribute('position', { x: nextEl.getAttribute('position').x, y: newPosY, z: nextEl.getAttribute('position').z });
+
+  }
+  
+
+  AFRAME.registerComponent('restrict-movement', {
+    schema: {
+      minX: { type: 'number', default: -10 },
+      maxX: { type: 'number', default: 10 },
+      minZ: { type: 'number', default: -10 },
+      maxZ: { type: 'number', default: 10 }
+    },
+    tick: function () {
+      var position = this.el.getAttribute('position');
+      
+      if (position.x < this.data.minX) {
+        position.x = this.data.minX;
+      } else if (position.x > this.data.maxX) {
+        position.x = this.data.maxX;
+      }
+      
+      if (position.z < this.data.minZ) {
+        position.z = this.data.minZ;
+      } else if (position.z > this.data.maxZ) {
+        position.z = this.data.maxZ;
+      }
+      
+      this.el.setAttribute('position', position);
+    }
+  });
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
