@@ -5,7 +5,6 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-cursor-teleport@1.5.0/dist/aframe-cursor-teleport-component.min.js"></script>
   <!-- <link rel="stylesheet" type="text/css" href="./styles.css"> -->
   <link rel="stylesheet" type="text/css" href="./styles.css">
-  <!-- <script src="../scripts/script.js"></script> -->
 
 </head>
 
@@ -19,23 +18,29 @@
   cursor="rayOrigin: mouse">
     <a-assets>
     
-    <a-asset-item id="lobby" src="./Models/Hallway.glb"></a-asset-item>
+    <a-asset-item id="lobby" src="./Models/Hallway-new.glb"></a-asset-item>
+    <!-- <a-asset-item id="lobby" src="./Models/room_modify.glb"></a-asset-item> -->
       <img id="welcome" src="./Images/nav-tips.png">
       <img id="footprint" src="./Images/footprint-new.png">
       <img id="ring-glow" src="./Images/ringGlow.png">
+      <!-- <img id="floor" src="./Images/floor-texture.jpeg"> -->
+      <img id="floor" src="./Images/texture.jpg">
+      <img id="label0" src="./Images/room-label0.png">
+      <img id="label1" src="./Images/room-label1.png">
+      <img id="hover-text" src="./Images/hover-text-new.png">
     </a-assets>
 
     <a-entity light="type: ambient; color: #FFF; intensity: 20" position="-0.5 3 1"></a-entity>
     <a-entity light="type: directional; color: #FFF; intensity: 1" position="0.6 3 4"></a-entity>
 
-    <a-entity id="light1" light="type: directional; color: #FFF; intensity: 0.2" position="-6 -5 -6" rotation="0 90 0"></a-entity>
+    <a-entity id="light1" light="type: spot; color: #ffdbea; intensity: 0.5 angle: 120" position="-1.38 0.44 -2.5" rotation="0 0 0"></a-entity>
     <a-entity id="light2" light="type: directional; color: #FFF; intensity: 0.4" position="-6 -5 -6" rotation="0 90 0"></a-entity>
-    <a-entity id="light3" light="type: point; color: #FFF; intensity: 0.4" position="-7 4 -38" rotation="0 90 0"></a-entity>
+    <a-entity id="light3" light="type: spot; color: #f8e2ea; intensity: 0.95; angle: 120; " position="-11.4 6.24 -20"></a-entity>
 
 
 
     <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable">
-      <a-entity id="head" position="0 2 0" camera look-controls="reverseMouseDrag: true" wasd-controls="acceleration:45"></a-entity>
+      <a-entity id="head" position="0 2.5 0" camera look-controls="reverseMouseDrag: true" wasd-controls="acceleration:45"></a-entity>
       <a-entity laser-controls="hand: left" raycaster="objects: .clickable; far: 100" line="color: red; opacity: 0.75"
         blink-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity>
       <a-entity laser-controls="hand: right" raycaster="objects: .clickable" line="color: red; opacity: 0.75"
@@ -43,10 +48,10 @@
     </a-entity>
 
 
-    <a-entity gltf-model="#lobby" scale="2.5 2.5 2.5" position="2 1 10" rotation="0 180 0"> 
-
-      
+    <a-entity gltf-model="#lobby" scale="2.5 2.5 2.5" position="2 -0.24 10" rotation="0 180 0"> 
     </a-entity>
+    <a-entity geometry="primitive:plane" position="0 0.035 -16" rotation="-90 0 0" scale="50 50 50" id="roof" material="src:#floor;color:#d1c9c9; shader:flat" ></a-entity>
+    <a-entity geometry="primitive:plane" position="-8.73 7.245 -18" rotation="90 0 0" scale="50 50 50" id="roof" material="color:#fbe7ca; shader:flat" ></a-entity>
 
     <!-- <a-entity environment="preset: default"></a-entity> -->
 
@@ -56,11 +61,23 @@
     <a-image src="#footprint" position="-3 0 -2" rotation="0 10 0" scale="0.5"> </a-image>
   </a-image> -->
   
-  <!-- <a-image src="#ring-glow" position="-20 0.3 -18.5" rotation="90 0 0" scale="15 15 15"
-  class="clickable" 
-  id="teleport-ring"
-  > </a-image> -->
+  <a-image src="#ring-glow" position="-20.3 0.06 -19.5" rotation="90 0 0" scale="25 25 25"
+  class="clickable interactive-image" 
+  id="teleport-ring0"
+  > 
+<a-image src="#hover-text" class="hover-text" scale="0.11 0.05 0.05" rotation="-90 0 0" position="0 0 -0.04" visible="false"> </a-image>
+</a-image>
 
+  <a-image src="#ring-glow" position="-13.3 0.066 -19.5" rotation="90 0 0" scale="25 25 25"
+  class="clickable interactive-image" 
+  id="teleport-ring1"> 
+  <a-image src="#hover-text" class="hover-text" scale="0.11 0.05 0.05" rotation="-90 0 0" position="0 0 -0.04" visible="false"> </a-image>
+
+
+</a-image>
+
+  <a-image src="#label0" position="-19.5 3.9 -16.5" scale="3.2 2 1" look-at="#cameraRig"> </a-image>
+  <a-image src="#label1" position="-13.5 3.9 -20.5" scale="3.2 2 1" look-at="#cameraRig"> </a-image>
 
     
   </a-scene>
@@ -97,9 +114,9 @@
 </div>
 
 
-<div id="loading-screen" style="position: absolute; width: 100%; height: 100%; background: black; color: white; display: flex; justify-content: center; align-items: center; z-index: 10;">
+<!-- <div id="loading-screen" style="position: absolute; width: 100%; height: 100%; background: black; color: white; display: flex; justify-content: center; align-items: center; z-index: 10;">
   <div id="loading-text">Loading... 0%</div>
-</div>
+</div> -->
 
 <div class="container" id="panel-1">
     <img src="Images/umtri.png" class="tutorial">
@@ -112,49 +129,61 @@
 
 
 <div id="infoPanel" class="flex-container">
-  <img class="tutorial" src="./Images/Welcome.png">
+  <img class="tutorial" src="./Images/nav-tips.png">
   <button class="clickable start-button" onclick="closePanel('infoPanel')"> Try it now </button>
 </div>
 
 
   
 
-  <script src="app.js"></script>
   <script>
     function closePanel(panelId) {
-        document.getElementById(panelId).style.display = "none";
-    }
-
-    function openPanel(panelId) {
-        document.getElementById(panelId).style.display = "flex";
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Get the A-Frame element
-      var teleportRing = document.querySelector('#teleport-ring');
+      document.getElementById(panelId).style.display = "none";
+  }
   
-      // Add an event listener for the 'click' event
-      teleportRing.addEventListener('click', function() {
-        // Navigate to the new URL
-        window.location.href = './room1.html';
-      });
-    });
-
+  function openPanel(panelId) {
+      document.getElementById(panelId).style.display = "flex";
+  }
+  
     document.addEventListener('DOMContentLoaded', function() {
-      var studiesButton = document.getElementById('studies-button'); // The button to toggle the studies detail
-      var studiesDetail = document.getElementById('studies-detail'); // The container for the studies links
-      
-      studiesButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default anchor action
-        var isHidden = studiesDetail.style.display === 'none';
-        studiesDetail.style.display = isHidden ? 'block' : 'none';
+      // Define an array of objects containing the selector for each ring and the target URL
+      const rings = [
+          { selector: '#teleport-ring0', url: './room1.html' },
+          { selector: '#teleport-ring1', url: './room_bodyshape.html' },
+          { selector: '#exit', url: './index.html' }
+      ];
+  
+      // Iterate over the array and add an event listener to each ring
+      rings.forEach(ring => {
+          const element = document.querySelector(ring.selector);
+          element.addEventListener('click', function() {
+              window.location.href = ring.url;
+          });
       });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var studiesButton = document.getElementById('studies-button'); // The button to toggle the studies detail
+    var studiesDetail = document.getElementById('studies-detail'); // The container for the studies links
+    
+    studiesButton.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default anchor action
+      var isHidden = studiesDetail.style.display === 'none';
+      studiesDetail.style.display = isHidden ? 'block' : 'none';
     });
+  });
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.interactive-image');
 
+    images.forEach((image) => {
+        const text = image.querySelector('.hover-text');
 
-    </script>
-
+        image.addEventListener('mouseenter', () => text.setAttribute('visible', true));
+        image.addEventListener('mouseleave', () => text.setAttribute('visible', false));
+    });
+});
+  </script>
 </body>
 
 </html>

@@ -169,6 +169,7 @@
     
 
     <script>
+      
       function closePanel(panelId) {
           document.getElementById(panelId).style.display = "none";
       }
@@ -187,7 +188,16 @@
         });
       });
 
-
+      document.addEventListener('DOMContentLoaded', function() {
+    var studiesButton = document.getElementById('studies-button'); // The button to toggle the studies detail
+    var studiesDetail = document.getElementById('studies-detail'); // The container for the studies links
+    
+    studiesButton.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default anchor action
+      var isHidden = studiesDetail.style.display === 'none';
+      studiesDetail.style.display = isHidden ? 'block' : 'none';
+    });
+  });
 
       AFRAME.registerComponent('proximity-effect',{
         schema:{

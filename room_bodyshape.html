@@ -32,15 +32,20 @@
       <img id="indicator" src="./Images/indicator.png">
       <img id="task-jump" src="./Images/task-jump.png">
       <img id="purpose-jump" src="./Images/purpose-jump.png">
-      <img id="safety-jump" src="./Images/safety-jump.png">
-      <img id="safety-jump-exp" src="./Images/safety-jump-exp.png">
+      <img id="purpose" src="./Images/purpose-jump.png">
+      <img id="safety-jump" src="./Images/equipment-jump.png">
+      <img id="safety-jump-exp" src="./Images/equipment-jump-exp.png">
       <img id="purpose-jump-exp" src="./Images/purpose-jump-exp.png">
       <img id="task-scan" src="./Images/task-scan.png">
       <img id="purpose-scan" src="./Images/purpose-scan.png">
-      <img id="safety-scan" src="./Images/safety-scan.png">
-      <img id="safety-scan-exp" src="./Images/safety-scan-exp.png">
+      <img id="safety-scan" src="./Images/equipment-scan.png">
+      <img id="safety-scan-exp" src="./Images/equipment-scan-exp.png">
       <img id="purpose-scan-exp" src="./Images/purpose-scan-exp.png">
-      <img id="ring-glow" src="./Images/ring-glow.png">
+      <img id="ring-glow" src="./Images/ring-glow.png"> 
+      <img id="exit" src="./Images/exit-arrow.png"> 
+      <img id="hover-text" src="./Images/hover-text-exit.png">
+
+
 
     </a-assets>
 
@@ -51,6 +56,7 @@
       rotation="0 0 0"
       look-controls="mouse:reverse-drag" 
       wasd-controls="acceleration:30" 
+      restrict-movement="minX: -1; maxX: 12; minZ: -7; maxZ: 2"
       proximity-effect="targets: #ring-strength, #ring-jump, #ring-scan; threshold: 1.5; infoPanels:#info-panel-0, #info-panel-1, #info-panel-2"
       >
         <a-cylinder id="effects" position="0 -2 0" height="10" radius="4" color=#000000" rotation="0 0 0"
@@ -62,7 +68,7 @@
 
     <a-entity gltf-model="#room" scale="35 35 35" position="29.15 -0.09 -12" rotation="0 0 0"></a-entity>
 
-        <!-- jump -->
+        <!-- jump -->x
 
         <a-entity id="jump-parent" position="-1.47 0.86 -0.92">
           <a-image src="#ring-glow" position="6.5 -0.48 -6.44" rotation="-90 0 0" scale="12 12 12"
@@ -103,12 +109,13 @@
     
     <!-- scan -->
     
+    <a-image src="#ring-glow" position="0.83 0.4 -4.49" rotation="-90 0 0" scale="12 12 12"
+    class="clickable" 
+    id="ring-scan"
+    ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 90" position="0 0.002 0"> </a-image> </a-image>
+
         <a-entity id="scan-parent" position="-0.63 0.45 -2" rotation="0 0 0">
-          <a-image src="#ring-glow" position="1.45 0.008 -2.6" rotation="-90 0 0" scale="12 12 12"
-          class="clickable" 
-          id="ring-scan"
-          ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 90" position="0 0.002 0"> </a-image> </a-image>
-    
+
     
           <a-entity gltf-model="#bodyScan" scale="40 40 40" position="0.5 0 -1.5" rotation="0 90 0"></a-entity>
     
@@ -139,7 +146,10 @@
         </a-entity>
     
     
+        <a-image src="#exit" position="-0.8 0.44 1.27" id="exit-ring" rotation="-90 90 0" class="clickable interactive-image">
+      <a-image src="#hover-text" class="hover-text" scale="1.5 0.75 0" rotation="90 0 0" position="0 0 0.65" visible="false"> </a-image>
 
+        </a-image>
 
 
     
@@ -176,55 +186,35 @@
   <a href="./room-body.html" class="study-link">Size and Shape Study</a>
 </div>
 
-<!-- <div class="container" id="panel-1">
-    <img src="Images/umtri.png" class="tutorial">
-    <div class="welcome-text">
-        Welcome to the University of Michigan Transportation Research Institute! Here you can explore the lab space and find out how biosciences research studies are conducted!
-    </div>
-    <button class="start-button" onclick="closePanel('panel-1'); closePanel('overlay'); openPanel('infoPanel')"> Enter Space </button>
-</div>
 
 
-
-<div id="infoPanel" class="flex-container">
-  <img class="tutorial" src="./Images/Welcome.png">
-  <button class="clickable start-button" onclick="closePanel('infoPanel')"> Try it now </button>
-</div> -->
-
-
-  
 
 
   <script>
-    function closePanel(panelId) {
-        document.getElementById(panelId).style.display = "none";
-    }
-
-    function openPanel(panelId) {
-        document.getElementById(panelId).style.display = "flex";
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
-      // Get the A-Frame element
-      var teleportRing = document.querySelector('#teleport-ring');
+      // Get the A-Frame elements for the rings
+      var ring = document.querySelector('#exit-ring');
+
+      // Add an event listener for the 'click' event on the first ring
+      ring.addEventListener('click', function() {
+          // Navigate to room1.html when the first ring is clicked
+          window.location.href = './index.html';
+          console.log("entered");
+      });
   
-      // Add an event listener for the 'click' event
-      teleportRing.addEventListener('click', function() {
-        // Navigate to the new URL
-        window.location.href = './room1.html';
-      });
-    });
+  });
 
-    document.addEventListener('DOMContentLoaded', function() {
-      var studiesButton = document.getElementById('studies-button'); // The button to toggle the studies detail
-      var studiesDetail = document.getElementById('studies-detail'); // The container for the studies links
-      
-      studiesButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default anchor action
-        var isHidden = studiesDetail.style.display === 'none';
-        studiesDetail.style.display = isHidden ? 'block' : 'none';
-      });
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.interactive-image');
+
+    images.forEach((image) => {
+        const text = image.querySelector('.hover-text');
+
+        image.addEventListener('mouseenter', () => text.setAttribute('visible', true));
+        image.addEventListener('mouseleave', () => text.setAttribute('visible', false));
     });
+});
 
   AFRAME.registerComponent('proximity-effect',{
     schema:{
@@ -343,7 +333,16 @@
 
 
 
-
+  document.addEventListener('DOMContentLoaded', function() {
+    var studiesButton = document.getElementById('studies-button'); // The button to toggle the studies detail
+    var studiesDetail = document.getElementById('studies-detail'); // The container for the studies links
+    
+    studiesButton.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default anchor action
+      var isHidden = studiesDetail.style.display === 'none';
+      studiesDetail.style.display = isHidden ? 'block' : 'none';
+    });
+  });
 
 
 
