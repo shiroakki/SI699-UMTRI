@@ -105,8 +105,8 @@ id="ring-desktop"
   <a-entity gltf-model="#strength" scale="3.5 3.5 3.5" position="-4.09 -1.05 6.9" rotation="0 180 0" id="#strength-device"></a-entity>
   <a-image src="#device-label0" position="3.4 3.2 -0.778" scale="1.33 0.46 1" look-at="#cameraRig" rotation="-15 90 0"> </a-image>
   <a-entity position="4.5 2.5 0.2" rotation="0 90 0" scale="0.5 0.5 0.5" id="info-panel-0" visible="false">
-    <a-entity gltf-model="#push" scale="1.6 1.6 1.6" position="2.12 -5 -0.25" rotation="0 -180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
-  easing: easeInSine; loop: true; to: 2 -5 1"></a-entity>
+    <a-entity gltf-model="#push" scale="1.7 1.7 1.7" position="2.12 -5 0.1" rotation="0 -180 0" animation__yoyo="property: position; dir: alternate; dur: 2500; pauseEvents: 2; resumeEvents: 4;
+  easing: easeInSine; loop: true; to: 2.12 -5 1"></a-entity>
 
     <a-image src="#task" class="clickable" position="0 0 0" id="task1" data-clickable scale="1.8 0.7 0.7"
     ></a-image>
@@ -196,7 +196,7 @@ id="ring-desktop"
     
 
     <script>
-      
+
       document.addEventListener('DOMContentLoaded', function() {
         // Get the A-Frame elements for the rings
         var ring = document.querySelector('#exit-ring');
