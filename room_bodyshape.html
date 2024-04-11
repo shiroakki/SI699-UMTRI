@@ -44,6 +44,7 @@
       <img id="ring-glow" src="./Images/ring-glow.png"> 
       <img id="exit" src="./Images/exit-arrow.png"> 
       <img id="hover-text" src="./Images/hover-text-exit.png">
+      <img id="data2" src="./Images/data2.png">
 
 
 
@@ -54,31 +55,39 @@
     <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable" effect-manager>
       <a-entity id="head" position="0 2.5 0" camera 
       rotation="0 0 0"
-      look-controls="mouse:reverse-drag" 
+      look-controls="reverseMouseDrag: true"
       wasd-controls="acceleration:30" 
       restrict-movement="minX: -1; maxX: 12; minZ: -7; maxZ: 2"
-      proximity-effect="targets: #ring-strength, #ring-jump, #ring-scan; threshold: 1.5; infoPanels:#info-panel-0, #info-panel-1, #info-panel-2"
+      proximity-effect="targets: #ring-desktop, #ring-jump, #ring-scan; threshold: 1.5; infoPanels:#info-panel-0, #info-panel-1, #info-panel-2"
       >
         <a-cylinder id="effects" position="0 -2 0" height="10" radius="4" color=#000000" rotation="0 0 0"
                         material="opacity: 0.4; side: double;" visible="false"></a-cylinder>
       </a-entity>
     </a-entity>
 
+
     <a-entity gltf-model="#desktop" scale="2.4 2.4 2.4" position="8.79 -0.39 -3.54" rotation="-90 0 0"></a-entity>
+    <a-image src="#ring-glow" position="6.45 0.54 -3.84" rotation="-90 -90 0" scale="12 12 12"
+    class="clickable" 
+    id="ring-desktop"
+    ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 0" position="0 0.001 0"> </a-image> </a-image>
+
+  <a-image src="#data2" position="7.774 2.3 -4.89" rotation="0 -90 0" scale="1 1 1" id="info-panel-0" visible="false"> </a-image>
+
 
     <a-entity gltf-model="#room" scale="35 35 35" position="29.15 -0.09 -12" rotation="0 0 0"></a-entity>
 
         <!-- jump -->x
 
         <a-entity id="jump-parent" position="-1.47 0.86 -0.92">
-          <a-image src="#ring-glow" position="6.5 -0.48 -6.44" rotation="-90 0 0" scale="12 12 12"
+          <a-image src="#ring-glow" position="6.65 -0.3 -6.24" rotation="-90 0 0" scale="12 12 12"
           class="clickable" 
           id="ring-jump"
           ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 0" position="0 0.001 0"> </a-image> </a-image>
       
       
-          <a-entity gltf-model="#jump" scale="0.09 0.09 0.09" position="5.54 -0.39 -9.5" rotation="0 -90 0"></a-entity>
-          <a-entity position="5.5 1.8 -7" rotation="-5 0 0" scale="0.5 0.5 0.5" id="info-panel-1" visible="false">
+          <a-entity gltf-model="#jump" scale="0.1 0.12 0.12" position="5.17 -0.39 -10.04" rotation="0 -90 0"></a-entity>
+          <a-entity position="5.3 1.8 -7" rotation="-5 0 0" scale="0.5 0.5 0.5" id="info-panel-1" visible="false">
             <a-entity gltf-model="#jumpFigure" scale="1.6 1.6 1.6" position="2.2 -3.5 0" rotation="0 180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
             easing: easeInSine; loop: true; to:2.2 -1.5 0"></a-entity>
       
@@ -109,7 +118,7 @@
     
     <!-- scan -->
     
-    <a-image src="#ring-glow" position="0.83 0.4 -4.49" rotation="-90 0 0" scale="12 12 12"
+    <a-image src="#ring-glow" position="0.83 0.56 -4.49" rotation="-90 0 0" scale="12 12 12"
     class="clickable" 
     id="ring-scan"
     ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 90" position="0 0.002 0"> </a-image> </a-image>
@@ -146,7 +155,7 @@
         </a-entity>
     
     
-        <a-image src="#exit" position="-0.8 0.44 1.27" id="exit-ring" rotation="-90 90 0" class="clickable interactive-image">
+        <a-image src="#exit" position="-0.8 0.57 1.27" id="exit-ring" rotation="-90 90 0" class="clickable interactive-image">
       <a-image src="#hover-text" class="hover-text" scale="1.5 0.75 0" rotation="90 0 0" position="0 0 0.65" visible="false"> </a-image>
 
         </a-image>
