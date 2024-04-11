@@ -24,7 +24,7 @@
       <img id="footprint" src="./Images/footprint-new.png">
       <img id="ring-glow" src="./Images/ringGlow.png">
       <!-- <img id="floor" src="./Images/floor-texture.jpeg"> -->
-      <img id="floor" src="./Images/texture.jpg">
+      <img id="floor" src="./Images/texture-new.png">
       <img id="label0" src="./Images/room-label0.png">
       <img id="label1" src="./Images/room-label1.png">
       <img id="hover-text" src="./Images/hover-text-new.png">
@@ -40,7 +40,11 @@
 
 
     <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable">
-      <a-entity id="head" position="0 2.5 0" camera look-controls="reverseMouseDrag: true" wasd-controls="acceleration:45"></a-entity>
+      <a-entity id="head" position="0 2.5 0" camera look-controls="reverseMouseDrag: true" wasd-controls="acceleration:60"
+      restrict-movement="minX: -16; maxX: 7; minZ: -20; maxZ: 2"
+      
+      
+      ></a-entity>
       <a-entity laser-controls="hand: left" raycaster="objects: .clickable; far: 100" line="color: red; opacity: 0.75"
         blink-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity>
       <a-entity laser-controls="hand: right" raycaster="objects: .clickable" line="color: red; opacity: 0.75"
@@ -56,19 +60,25 @@
     <!-- <a-entity environment="preset: default"></a-entity> -->
 
 
-  <!-- <a-image src="#footprint" position="-1.17 0 -0.24" rotation="-90 40 0" scale="0.5">
-    <a-image src="#footprint" position="-2 0 -1" rotation="0 0 0" scale="0.5"> </a-image>
-    <a-image src="#footprint" position="-3 0 -2" rotation="0 10 0" scale="0.5"> </a-image>
-  </a-image> -->
+    <a-entity id="footprint-group" rotation="-90 25 0" position="-3.28 0.062 -1.88"> 
+      <a-image src="#footprint" position="-1.27 1.106 0" rotation="0 0 0" scale="0.5"></a-image>
+      <a-image src="#footprint" position="-2.2 3.12 0" rotation="0 0 0" scale="0.5"> </a-image>
+      <a-image src="#footprint" position="-3.31 4.8 0" rotation=0 0 0" scale="0.5"> </a-image>
+      <a-image src="#footprint" position="-4.8 6.8 0" rotation=0 0 0" scale="0.5"> </a-image>
+      <a-image src="#footprint" position="-6.2 9.8 0" rotation=0 0 0" scale="0.5"> </a-image>
+    </a-entity>
+
   
-  <a-image src="#ring-glow" position="-20.3 0.06 -19.5" rotation="90 0 0" scale="25 25 25"
+  
+  <a-image src="#ring-glow" position="-20.3 0.06 -19.5" rotation="90 0 0" scale="15 15 15"
   class="clickable interactive-image" 
   id="teleport-ring0"
-  > 
+  >
+
 <a-image src="#hover-text" class="hover-text" scale="0.11 0.05 0.05" rotation="-90 0 0" position="0 0 -0.04" visible="false"> </a-image>
 </a-image>
 
-  <a-image src="#ring-glow" position="-13.3 0.066 -19.5" rotation="90 0 0" scale="25 25 25"
+  <a-image src="#ring-glow" position="-13.3 0.066 -19.5" rotation="90 0 0" scale="15 15 15"
   class="clickable interactive-image" 
   id="teleport-ring1"> 
   <a-image src="#hover-text" class="hover-text" scale="0.11 0.05 0.05" rotation="-90 0 0" position="0 0 -0.04" visible="false"> </a-image>
@@ -84,7 +94,6 @@
 
 
 
-<div class="overlay" id="overlay"></div>
 
 <div class="nav-container">
   <input type="checkbox" id="toggle" checked />
@@ -118,6 +127,8 @@
   <div id="loading-text">Loading... 0%</div>
 </div> -->
 
+<!-- <div class="overlay" id="overlay"></div>
+
 <div class="container" id="panel-1">
     <img src="Images/umtri.png" class="tutorial">
     <div class="welcome-text">
@@ -131,7 +142,7 @@
 <div id="infoPanel" class="flex-container">
   <img class="tutorial" src="./Images/nav-tips.png">
   <button class="clickable start-button" onclick="closePanel('infoPanel')"> Try it now </button>
-</div>
+</div> -->
 
 
   
@@ -182,6 +193,45 @@
         image.addEventListener('mouseenter', () => text.setAttribute('visible', true));
         image.addEventListener('mouseleave', () => text.setAttribute('visible', false));
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const cameraPosition = urlParams.get('cameraPosition');
+  if (cameraPosition) {
+      const positionArray = cameraPosition.split(',').map(Number);
+      const cameraRig = document.querySelector('#cameraRig');
+      if (cameraRig) {
+          cameraRig.setAttribute('position', {x: positionArray[0], y: positionArray[1], z: positionArray[2]});
+          console.log("success");
+      }
+  }
+});
+
+AFRAME.registerComponent('restrict-movement', {
+  schema: {
+    minX: { type: 'number', default: -10 },
+    maxX: { type: 'number', default: 10 },
+    minZ: { type: 'number', default: -10 },
+    maxZ: { type: 'number', default: 10 }
+  },
+  tick: function () {
+    var position = this.el.getAttribute('position');
+    
+    if (position.x < this.data.minX) {
+      position.x = this.data.minX;
+    } else if (position.x > this.data.maxX) {
+      position.x = this.data.maxX;
+    }
+    
+    if (position.z < this.data.minZ) {
+      position.z = this.data.minZ;
+    } else if (position.z > this.data.maxZ) {
+      position.z = this.data.maxZ;
+    }
+    
+    this.el.setAttribute('position', position);
+  }
 });
   </script>
 </body>

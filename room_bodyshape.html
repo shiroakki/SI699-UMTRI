@@ -208,10 +208,25 @@
       // Add an event listener for the 'click' event on the first ring
       ring.addEventListener('click', function() {
           // Navigate to room1.html when the first ring is clicked
-          window.location.href = './index.html';
+          
+          window.location.href = './index.html?cameraPosition=-17,0,-15';
       });
   
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const cameraPosition = urlParams.get('cameraPosition');
+    if (cameraPosition) {
+        const positionArray = cameraPosition.split(',').map(Number);
+        const cameraRig = document.querySelector('#cameraRig');
+        if (cameraRig) {
+            cameraRig.setAttribute('position', {x: positionArray[0], y: positionArray[1], z: positionArray[2]});
+            console.log("success");
+        }
+    }
+});
+
 
   document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('.interactive-image');
