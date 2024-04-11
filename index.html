@@ -136,15 +136,8 @@
 </div>
 </div>
 
-<!-- <div class="container" id="panel-1">
-    <img src="Images/umtri.png" class="tutorial">
-    <div class="welcome-text">
-        Welcome to the University of Michigan Transportation Research Institute! Here you can explore the lab space and find out how biosciences research studies are conducted!
-    </div>
-    <button class="start-button" onclick="closePanel('panel-1'); closePanel('overlay'); openPanel('infoPanel')"> Enter Space </button>
-</div> -->
 
-<div class="container" id="panel-1" style="display: none;">
+<div class="container" id="panel-1" style="display: none">
   <img src="Images/umtri.png" class="tutorial">
   <div class="welcome-text">
       Welcome to the University of Michigan Transportation Research Institute! Here you can explore the lab space and find out how biosciences research studies are conducted!
@@ -162,6 +155,9 @@
   
 
   <script>
+
+
+
     function closePanel(panelId) {
       document.getElementById(panelId).style.display = "none";
   }
@@ -169,12 +165,35 @@
   function openPanel(panelId) {
       document.getElementById(panelId).style.display = "flex";
   }
-  window.addEventListener('DOMContentLoaded', (event) => {
-    setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        document.getElementById('panel-1').style.display = 'block';
-    }, 1800); // 2500 milliseconds = 2.5 seconds
+
+  
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const cameraPosition = urlParams.get('cameraPosition');
+  if (cameraPosition) {
+      const positionArray = cameraPosition.split(',').map(Number);
+      const cameraRig = document.querySelector('#cameraRig');
+      if (cameraRig) {
+          cameraRig.setAttribute('position', {x: positionArray[0], y: positionArray[1], z: positionArray[2]});
+          document.getElementById('overlay').style.display = 'none';
+          document.getElementById('loading-screen').style.display = 'none';
+          document.getElementById('panel-1').style.display = 'none';
+  
+          console.log("success");
+      }
+  }
+  else{
+    console.log("failed");
+      setTimeout(() => {
+      document.getElementById('loading-screen').style.display = 'none';
+      document.getElementById('panel-1').style.display = 'block';
+  }, 1800); // 2500 milliseconds = 2.5 seconds
+  }
 });
+
   
     document.addEventListener('DOMContentLoaded', function() {
       // Define an array of objects containing the selector for each ring and the target URL
@@ -215,18 +234,9 @@
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const cameraPosition = urlParams.get('cameraPosition');
-  if (cameraPosition) {
-      const positionArray = cameraPosition.split(',').map(Number);
-      const cameraRig = document.querySelector('#cameraRig');
-      if (cameraRig) {
-          cameraRig.setAttribute('position', {x: positionArray[0], y: positionArray[1], z: positionArray[2]});
-          console.log("success");
-      }
-  }
-});
+
+
+
 
 AFRAME.registerComponent('restrict-movement', {
   schema: {
