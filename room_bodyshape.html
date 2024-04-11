@@ -46,6 +46,9 @@
       <img id="hover-text" src="./Images/hover-text-exit.png">
       <img id="data2" src="./Images/data2.png">
 
+      <img id="device-label1" src="./Images/device-label1.png">
+      <img id="device-label2" src="./Images/device-label2.png">
+      <img id="device-label3" src="./Images/device-label3.png">
 
 
     </a-assets>
@@ -71,25 +74,28 @@
     class="clickable" 
     id="ring-desktop"
     ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 0" position="0 0.001 0"> </a-image> </a-image>
+  <a-image src="#device-label3" position="7.18 2.04 -2.89" scale="1.07 0.38 1" look-at="#cameraRig" rotation="-15 -90 0"> </a-image>
 
-  <a-image src="#data2" position="7.774 2.3 -4.89" rotation="0 -90 0" scale="1 1 1" id="info-panel-0" visible="false"> </a-image>
+  <a-image src="#data2" position="7.774 2.7 -4.89" rotation="0 -90 0" scale="1.5 1.5 1.5" id="info-panel-0" visible="false"> </a-image>
 
 
     <a-entity gltf-model="#room" scale="35 35 35" position="29.15 -0.09 -12" rotation="0 0 0"></a-entity>
 
-        <!-- jump -->x
+        <!-- jump -->
 
+        <a-image src="#ring-glow" position="5.187 0.54 -6.96" rotation="-90 0 0" scale="12 12 12"
+        class="clickable" 
+        id="ring-jump"
+        ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 0" position="0 0.001 0"> </a-image> </a-image>
+    
         <a-entity id="jump-parent" position="-1.47 0.86 -0.92">
-          <a-image src="#ring-glow" position="6.65 -0.3 -6.24" rotation="-90 0 0" scale="12 12 12"
-          class="clickable" 
-          id="ring-jump"
-          ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 0" position="0 0.001 0"> </a-image> </a-image>
-      
-      
+
+          <a-image src="#device-label1" position="6.67 3.55 -8.2" scale="1.33 0.46 1" look-at="#cameraRig" rotation="15 0 0"> </a-image>
+          
           <a-entity gltf-model="#jump" scale="0.1 0.12 0.12" position="5.17 -0.39 -10.04" rotation="0 -90 0"></a-entity>
           <a-entity position="5.3 1.8 -7" rotation="-5 0 0" scale="0.5 0.5 0.5" id="info-panel-1" visible="false">
-            <a-entity gltf-model="#jumpFigure" scale="1.6 1.6 1.6" position="2.2 -3.5 0" rotation="0 180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
-            easing: easeInSine; loop: true; to:2.2 -1.5 0"></a-entity>
+            <a-entity gltf-model="#jumpFigure" scale="1.6 1.6 1.6" position="2.59 -3.5 -0.46" rotation="0 180 0" animation__yoyo="property: position; dir: alternate; dur: 1000;
+            easing: easeInSine; loop: true; to:2.59 -1.83 -0.46"></a-entity>
       
       
             <a-image src="#task-jump" class="clickable" position="0 0 0" id="task1" data-clickable scale="1.8 0.7 0.7"
@@ -124,6 +130,7 @@
     ><a-image src="#indicator" scale="0.02 0.02 0.02" rotation="0 0 90" position="0 0.002 0"> </a-image> </a-image>
 
         <a-entity id="scan-parent" position="-0.63 0.45 -2" rotation="0 0 0">
+          <a-image src="#device-label2" position="0.65 3.96 -2.5" scale="1.33 0.46 1" look-at="#cameraRig" rotation="15 90 0"> </a-image>
 
     
           <a-entity gltf-model="#bodyScan" scale="40 40 40" position="0.5 0 -1.5" rotation="0 90 0"></a-entity>
