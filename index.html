@@ -28,6 +28,7 @@
       <img id="label0" src="./Images/room-label0.png">
       <img id="label1" src="./Images/room-label1.png">
       <img id="hover-text" src="./Images/hover-text-new.png">
+      <img id="loading" src="./Images/loading.png">
     </a-assets>
 
     <a-entity light="type: ambient; color: #FFF; intensity: 20" position="-0.5 3 1"></a-entity>
@@ -127,22 +128,35 @@
   <div id="loading-text">Loading... 0%</div>
 </div> -->
 
-<!-- <div class="overlay" id="overlay"></div>
+<div class="overlay" id="overlay"></div>
+<div id="loading-screen" style="position: fixed; width: 100%; height: 100%; background-color: black; color: white; display: flex; flex-direction:column; justify-content: center; align-items: center; z-index: 10;">
+<img src="Images/loading.png" class="tutorial">
+<div class="welcome-text">
+  Take a deep breath, your journey to UMTRI awaits!
+</div>
+</div>
 
-<div class="container" id="panel-1">
+<!-- <div class="container" id="panel-1">
     <img src="Images/umtri.png" class="tutorial">
     <div class="welcome-text">
         Welcome to the University of Michigan Transportation Research Institute! Here you can explore the lab space and find out how biosciences research studies are conducted!
     </div>
     <button class="start-button" onclick="closePanel('panel-1'); closePanel('overlay'); openPanel('infoPanel')"> Enter Space </button>
-</div>
+</div> -->
 
+<div class="container" id="panel-1" style="display: none;">
+  <img src="Images/umtri.png" class="tutorial">
+  <div class="welcome-text">
+      Welcome to the University of Michigan Transportation Research Institute! Here you can explore the lab space and find out how biosciences research studies are conducted!
+  </div>
+  <button class="start-button" onclick="closePanel('panel-1'); closePanel('overlay'); openPanel('infoPanel')"> Enter Space </button>
+</div>
 
 
 <div id="infoPanel" class="flex-container">
   <img class="tutorial" src="./Images/nav-tips.png">
   <button class="clickable start-button" onclick="closePanel('infoPanel')"> Try it now </button>
-</div> -->
+</div>
 
 
   
@@ -155,6 +169,12 @@
   function openPanel(panelId) {
       document.getElementById(panelId).style.display = "flex";
   }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('panel-1').style.display = 'block';
+    }, 1800); // 2500 milliseconds = 2.5 seconds
+});
   
     document.addEventListener('DOMContentLoaded', function() {
       // Define an array of objects containing the selector for each ring and the target URL
