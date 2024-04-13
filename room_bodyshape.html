@@ -170,7 +170,10 @@
 
         </a-image>
 
-
+        <audio id="room-intro" >
+          <source src="./Audio/bodyShape.mp3" type="audio/mp3">
+        </audio>
+        
     
   </a-scene>
 
@@ -191,9 +194,11 @@
           <button class="tooltip"> STUDIES </button>
         
         </a> </li>
-        <li><a href="#0"><img src="Images/audio.png" width="40%">
-          <button class="tooltip"> AUDIO </button>
-        </a></li>
+      <li><a id="audio-toggle" href="#">
+        <img  id="audio-icon" src="Images/audio.png" width="40%" style="display:block">
+        <button class="tooltip"> AUDIO </button>
+        <img id="audio-icon-mute" src="Images/audio-muted.png" width="50%" style="display:none;">
+      </a></li>
       </ul>
     </nav>
   </label>
@@ -202,7 +207,7 @@
 <div id="studies-detail" class="studies-info" style="display: none;">
   <h4>EXPLORE OTHER STUDIES</h4>
   <a href="./room1.html" class="study-link">Strength Study</a>
-  <a href="./room-body.html" class="study-link">Size and Shape Study</a>
+  <a href="#" class="study-link">Size and Shape Study</a>
 </div>
 
 <div class="signup-btn-wrapper">
@@ -217,6 +222,54 @@
 
 
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const audioToggleButton = document.getElementById('audio-toggle');
+      const audioIcon = document.getElementById('audio-icon');
+      const audioIconMute = document.getElementById('audio-icon-mute');
+  
+      audioToggleButton.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent the default anchor behavior
+          if (audioIcon.style.display !== 'none') {
+              audioIcon.style.display = 'none';
+              audioIconMute.style.display = 'block';
+              audioIconMute.style.marginTop = '-3px';
+          } else {
+              audioIcon.style.display = 'block';
+              audioIconMute.style.display = 'none';
+          }
+      });
+  });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = document.getElementById('room-intro');
+      const audioToggleButton = document.getElementById('audio-toggle');
+  
+      // Initially check if audio should be playing or not based on localStorage
+      const shouldPlay = localStorage.getItem('audioEnabled') === 'true';
+      if (shouldPlay) {
+        setTimeout(() => {
+          audio.play();
+      }, 1500);
+
+      } else {
+        audio.pause();
+
+      }
+  
+      audioToggleButton.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent default anchor behavior
+          if (audio.paused) {
+            setTimeout(() => {
+              audio.play();
+              localStorage.setItem('audioEnabled', 'true'); // Remember state in localStorage
+          }, 1000); // Remember state in localStorage
+          } else {
+              audio.pause();
+              localStorage.setItem('audioEnabled', 'false'); // Remember state in localStorage
+          }
+      });
+  });
 
     document.addEventListener('DOMContentLoaded', function() {
       // Get the A-Frame elements for the rings
