@@ -49,6 +49,7 @@
       <img id="device-label1" src="./Images/device-label1.png">
       <img id="device-label2" src="./Images/device-label2.png">
       <img id="device-label3" src="./Images/device-label3.png">
+      <img id="floor-texture" src="./Images/floor.jpg">
 
 
     </a-assets>
@@ -67,6 +68,8 @@
                         material="opacity: 0.4; side: double;" visible="false"></a-cylinder>
       </a-entity>
     </a-entity>
+
+    <a-entity geometry="primitive:plane" position="13.34 0.385 -5.04" rotation="90 0 0" scale="35 20 20" id="roof" material="color: #cacfd8; shader:flat; side: double; src:#floor-texture" ></a-entity>
 
 
     <a-entity gltf-model="#desktop" scale="2.4 2.4 2.4" position="8.79 -0.39 -3.54" rotation="-90 0 0"></a-entity>
