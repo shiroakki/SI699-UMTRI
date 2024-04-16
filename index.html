@@ -162,54 +162,56 @@
 
   <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const audioToggleButton = document.getElementById('audio-toggle');
-      const audioIcon = document.getElementById('audio-icon');
-      const audioIconMute = document.getElementById('audio-icon-mute');
-  
-      audioToggleButton.addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent the default anchor behavior
-          if (audioIcon.style.display !== 'none') {
-              audioIcon.style.display = 'none';
-              audioIconMute.style.display = 'block';
-              audioIconMute.style.marginTop = '-3px';
-          } else {
-              audioIcon.style.display = 'block';
-              audioIconMute.style.display = 'none';
-          }
-      });
-  });
 
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const audio = document.getElementById('room-intro');
-      const audioToggleButton = document.getElementById('audio-toggle');
-  
-      // Initially check if audio should be playing or not based on localStorage
-      const shouldPlay = localStorage.getItem('audioEnabled') === 'true';
-      if (shouldPlay) {
+  document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('room-intro');
+    const audioToggleButton = document.getElementById('audio-toggle');
+
+    // Initially check if audio should be playing or not based on localStorage
+    const shouldPlay = localStorage.getItem('audioEnabled');
+    console.log(shouldPlay);
+
+    // If shouldPlay is not set or if it is 'true', play the audio
+    if (shouldPlay !== 'false') {
         setTimeout(() => {
-          audio.play();
-      }, 1500);
+            audio.play();
+            localStorage.setItem('audioEnabled', 'true'); // Set the state in localStorage
+        }, 1500);
+    }
 
-      } else {
-        audio.pause();
-
-      }
-  
-      audioToggleButton.addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent default anchor behavior
-          if (audio.paused) {
+    audioToggleButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        if (audio.paused) {
             setTimeout(() => {
-              audio.play();
-              localStorage.setItem('audioEnabled', 'true'); // Remember state in localStorage
-          }, 1000); // Remember state in localStorage
-          } else {
-              audio.pause();
-              localStorage.setItem('audioEnabled', 'false'); // Remember state in localStorage
-          }
-      });
+                audio.play();
+                localStorage.setItem('audioEnabled', 'true'); // Remember state in localStorage
+            }, 1000);
+        } else {
+            audio.pause();
+            localStorage.setItem('audioEnabled', 'false'); // Remember state in localStorage
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const audioToggleButton = document.getElementById('audio-toggle');
+  const audioIcon = document.getElementById('audio-icon');
+  const audioIconMute = document.getElementById('audio-icon-mute');
+
+  audioToggleButton.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default anchor behavior
+      if (audioIcon.style.display !== 'none') {
+          audioIcon.style.display = 'none';
+          audioIconMute.style.display = 'block';
+          audioIconMute.style.marginTop = '-3px';
+      } else {
+          audioIcon.style.display = 'block';
+          audioIconMute.style.display = 'none';
+      }
   });
+});
+
 
     function closePanel(panelId) {
       document.getElementById(panelId).style.display = "none";
@@ -239,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
   else{
-    console.log("failed");
+
       setTimeout(() => {
       document.getElementById('loading-screen').style.display = 'none';
       document.getElementById('panel-1').style.display = 'block';
