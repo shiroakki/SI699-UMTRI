@@ -56,7 +56,8 @@
 
 
 
-    <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable" effect-manager>
+    <a-entity id="cameraRig" 
+    >
       <a-entity id="head" position="0 2.5 0" camera 
       rotation="0 0 0"
       look-controls="reverseMouseDrag: true"
@@ -165,7 +166,7 @@
         </a-entity>
     
     
-        <a-image src="#exit" position="-0.8 0.57 1.27" id="exit-ring" rotation="-90 90 0" class="clickable interactive-image">
+        <a-image src="#exit" position="-0.8 0.57 1.27" id="exit-ring" rotation="-90 90 0" class="interactive-image">
       <a-image src="#hover-text" class="hover-text" scale="1.5 0.75 0" rotation="90 0 0" position="0 0 0.65" visible="false"> </a-image>
 
         </a-image>
@@ -182,8 +183,8 @@
 <!-- <div class="overlay" id="overlay"></div> -->
 
 <div class="nav-container">
-  <input type="checkbox" id="toggle" checked />
-  <label class="button" for="toggle">
+  <!-- <input type="checkbox" id="toggle" checked /> -->
+  <!-- <label class="button" for="toggle"> -->
     <nav class="nav">
       <ul>
         <li><a href="./index.html"><img src="Images/home-new.png" width="50%">
@@ -219,57 +220,65 @@
   </div>
 </div>
 
-
+<div id="subtitle-body" style="display: none; position: absolute; bottom: 10%; left:25%; width: 50%; text-align: center; color: white; font-size: 16px; background-color: rgba(0, 0, 0, 0.75); padding: 10px 0; z-index: 999;">
+  You have entered the youth body and size study space. This study collects data on child's body size and body shape to inform product design.  
+  Interact with different devices to find out how these tasks are completed.
+</div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const audioToggleButton = document.getElementById('audio-toggle');
-      const audioIcon = document.getElementById('audio-icon');
-      const audioIconMute = document.getElementById('audio-icon-mute');
-  
-      audioToggleButton.addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent the default anchor behavior
-          if (audioIcon.style.display !== 'none') {
-              audioIcon.style.display = 'none';
-              audioIconMute.style.display = 'block';
-              audioIconMute.style.marginTop = '-3px';
-          } else {
-              audioIcon.style.display = 'block';
-              audioIconMute.style.display = 'none';
-          }
-      });
-  });
+    
 
 
     document.addEventListener('DOMContentLoaded', function() {
       const audio = document.getElementById('room-intro');
       const audioToggleButton = document.getElementById('audio-toggle');
+      const audioIcon = document.getElementById('audio-icon');
+      const audioIconMute = document.getElementById('audio-icon-mute');
+      const subtitleContainer = document.getElementById('subtitle-body');
   
-      // Initially check if audio should be playing or not based on localStorage
-      const shouldPlay = localStorage.getItem('audioEnabled') === 'true';
-      if (shouldPlay) {
-        setTimeout(() => {
-          audio.play();
-      }, 1500);
-
-      } else {
-        audio.pause();
-
+      // Initialize audio setting
+      if (localStorage.getItem('audioEnabled') === null) {
+          localStorage.setItem('audioEnabled', 'true');
       }
   
-      audioToggleButton.addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent default anchor behavior
-          if (audio.paused) {
-            setTimeout(() => {
+      // Check audio setting and set initial audio and subtitle state
+      const shouldPlay = localStorage.getItem('audioEnabled') === 'true';
+      if (shouldPlay) {
+          setTimeout(() => {
               audio.play();
-              localStorage.setItem('audioEnabled', 'true'); // Remember state in localStorage
-          }, 1000); // Remember state in localStorage
+              subtitleContainer.style.display = 'block'; // Show subtitles with delay
+          }, 1500);
+      }
+  
+      // Handle audio toggle
+      audioToggleButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          if (audio.paused) {
+              setTimeout(() => {
+                  audio.play();
+                  localStorage.setItem('audioEnabled', 'true');
+                  subtitleContainer.style.display = 'block'; // Show subtitles when audio plays
+                  audioIcon.style.display = 'none';
+                  audioIconMute.style.display = 'block';
+                  audioIconMute.style.marginTop = '-3px';
+              }, 1000);
           } else {
               audio.pause();
-              localStorage.setItem('audioEnabled', 'false'); // Remember state in localStorage
+              localStorage.setItem('audioEnabled', 'false');
+              subtitleContainer.style.display = 'none'; // Hide subtitles when audio pauses
+              audioIcon.style.display = 'block';
+              audioIconMute.style.display = 'none';
           }
       });
+  
+      // Ensure subtitles hide when audio ends
+      audio.addEventListener('ended', function() {
+          subtitleContainer.style.display = 'none';
+          audioIcon.style.display = 'block';
+          audioIconMute.style.display = 'none';
+      });
   });
+   
 
     document.addEventListener('DOMContentLoaded', function() {
       // Get the A-Frame elements for the rings

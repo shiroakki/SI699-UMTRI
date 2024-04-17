@@ -42,9 +42,8 @@
 
     <a-entity id="cameraRig" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; ignoreEntities: .clickable">
       <a-entity id="head" position="0 2.5 0" camera look-controls="reverseMouseDrag: true" wasd-controls="acceleration:60"
-      restrict-movement="minX: -16; maxX: 7; minZ: -20; maxZ: 2"
-      
-      
+      restrict-movement="minX: -16; maxX: 7; minZ: -20; maxZ: 2" 
+      proximity-audio-trigger
       ></a-entity>
       <a-entity laser-controls="hand: left" raycaster="objects: .clickable; far: 100" line="color: red; opacity: 0.75"
         blink-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity>
@@ -71,7 +70,7 @@
 
   
   
-  <a-image src="#ring-glow" position="-20.3 0.06 -19.5" rotation="90 0 0" scale="15 15 15"
+  <a-image src="#ring-glow" position="-20.3 0.06 -19.5" rotation="90 0 0" scale="25 25 25"
   class="clickable interactive-image" 
   id="teleport-ring0"
   >
@@ -79,7 +78,7 @@
 <a-image src="#hover-text" class="hover-text" scale="0.11 0.05 0.05" rotation="-90 0 0" position="0 0 -0.04" visible="false"> </a-image>
 </a-image>
 
-  <a-image src="#ring-glow" position="-13.3 0.066 -19.5" rotation="90 0 0" scale="15 15 15"
+  <a-image src="#ring-glow" position="-13.3 0.066 -19.5" rotation="90 0 0" scale="25 25 25"
   class="clickable interactive-image" 
   id="teleport-ring1"> 
   <a-image src="#hover-text" class="hover-text" scale="0.11 0.05 0.05" rotation="-90 0 0" position="0 0 -0.04" visible="false"> </a-image>
@@ -95,14 +94,19 @@
     <source src="./Audio/UMTRI.mp3" type="audio/mp3">
   </audio>
 
+      
+  <audio id="hallway-audio" >
+    <source src="./Audio/hallway.mp3" type="audio/mp3">
+  </audio>
+
   </a-scene>
 
 
 
 
 <div class="nav-container">
-  <input type="checkbox" id="toggle" checked />
-  <label class="button" for="toggle">
+  <!-- <input type="checkbox" id="toggle" checked /> -->
+  <!-- <label class="button" for="toggle"> -->
     <nav class="nav">
       <ul>
         <li><a href="./index.html"><img src="Images/home-new.png" width="50%">
@@ -157,65 +161,105 @@
   <button class="clickable start-button" onclick="closePanel('infoPanel')"> Try it now </button>
 </div>
 
-
+<div id="subtitle-container" style="display: none; position: absolute; bottom: 10%; left:25%; width: 50%; text-align: center; color: white; font-size: 16px; z-index: 999;background-color: rgba(0, 0, 0, 0.75); padding: 10px 0;">
+  <span id="subtitles">You have entered the hallway. 
+    Explore different rooms to see what studies are going on </span>
+</div>
   
+<div id="subtitle-intro" style="display: none; position: absolute; bottom: 10%; left:25%; width: 50%; text-align: center; color: white; font-size: 16px; background-color: rgba(0, 0, 0, 0.75); padding: 10px 0; z-index: 999;">
+  Welcome to the University of Michigan Transportation Research Institute! Here you can explore the lab space and find out how biosciences research studies are conducted!
+</div>
 
   <script>
 
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const audio = document.getElementById('room-intro');
-      const audioToggleButton = document.getElementById('audio-toggle');
-  
-      // Initialize 'audioEnabled' to 'true' if it hasn't been set yet
-      if (localStorage.getItem('audioEnabled') === null) {
-          localStorage.setItem('audioEnabled', 'true');
-      }
-  
-      // Determine if audio should play based on localStorage setting
-      const shouldPlay = localStorage.getItem('audioEnabled') === 'true';
-  
-      // Automatically play the audio with a 1.5 second delay if it should play
-      if (shouldPlay) {
-          setTimeout(() => {
-              audio.play();
-          }, 1500);
-      }
-  
-      // Toggle audio play/pause on button click
-      audioToggleButton.addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent default link behavior
-          if (audio.paused) {
-              setTimeout(() => {
+    AFRAME.registerComponent('proximity-audio-trigger', {
+      schema: {
+          targetPosition: {type: 'vec3', default: {x: -17, y: 0, z: -12}},
+          threshold: {type: 'number', default: 3}
+      },
+      init: function () {
+          this.audioPlayed = false;
+          this.el.addEventListener('componentchanged', (evt) => {
+              if (evt.detail.name === 'position') {
+                  this.checkProximity();
+              }
+          });
+      },
+      checkProximity: function () {
+          if (this.audioPlayed) return;
+          const position = this.el.getAttribute('position');
+          const distance = this.calculateDistance(position, this.data.targetPosition);
+          const subtitles = document.getElementById('subtitles');
+          const subtitleContainer = document.getElementById('subtitle-container');
+          if (distance < this.data.threshold) {
+              const audio = document.querySelector('#hallway-audio');
+              if (audio && !audio.isPlaying) {
                   audio.play();
-                  localStorage.setItem('audioEnabled', 'true'); // Remember audio is enabled
-              }, 1000); // Delay to simulate a response time
-          } else {
-              audio.pause();
-              localStorage.setItem('audioEnabled', 'false'); // Remember audio is disabled
+                  subtitleContainer.style.display = 'block'; // Show subtitles
+                  this.audioPlayed = true;
+                  // Hide subtitles when audio ends
+                  audio.addEventListener('ended', () => {
+                      subtitleContainer.style.display = 'none';
+                  });
+              }
           }
-      });
-  });
-
-document.addEventListener('DOMContentLoaded', function() {
-  const audioToggleButton = document.getElementById('audio-toggle');
-  const audioIcon = document.getElementById('audio-icon');
-  const audioIconMute = document.getElementById('audio-icon-mute');
-
-  audioToggleButton.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent the default anchor behavior
-      if (audioIcon.style.display !== 'none') {
-          audioIcon.style.display = 'none';
-          audioIconMute.style.display = 'block';
-          audioIconMute.style.marginTop = '-3px';
-      } else {
-          audioIcon.style.display = 'block';
-          audioIconMute.style.display = 'none';
+      },
+      calculateDistance: function (pos1, pos2) {
+          const dx = pos1.x - pos2.x;
+          const dz = pos1.z - pos2.z;
+          return Math.sqrt(dx * dx + dz * dz);
       }
   });
-});
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('room-intro');
+    const audioToggleButton = document.getElementById('audio-toggle');
+    const audioIcon = document.getElementById('audio-icon');
+    const audioIconMute = document.getElementById('audio-icon-mute');
+    const subtitleContainer = document.getElementById('subtitle-intro');
+
+    // Initialize audio setting
+    if (localStorage.getItem('audioEnabled') === null) {
+        localStorage.setItem('audioEnabled', 'true');
+    }
+
+    // Check audio setting and set initial audio and subtitle state
+    const shouldPlay = localStorage.getItem('audioEnabled') === 'true';
+    if (shouldPlay) {
+        setTimeout(() => {
+            audio.play();
+            subtitleContainer.style.display = 'block'; // Show subtitles with delay
+        }, 1500);
+    }
+
+    // Handle audio toggle
+    audioToggleButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (audio.paused) {
+            setTimeout(() => {
+                audio.play();
+                localStorage.setItem('audioEnabled', 'true');
+                subtitleContainer.style.display = 'block'; // Show subtitles when audio plays
+                audioIcon.style.display = 'none';
+                audioIconMute.style.display = 'block';
+                audioIconMute.style.marginTop = '-3px';
+            }, 1000);
+        } else {
+            audio.pause();
+            localStorage.setItem('audioEnabled', 'false');
+            subtitleContainer.style.display = 'none'; // Hide subtitles when audio pauses
+            audioIcon.style.display = 'block';
+            audioIconMute.style.display = 'none';
+        }
+    });
+
+    // Ensure subtitles hide when audio ends
+    audio.addEventListener('ended', function() {
+        subtitleContainer.style.display = 'none';
+        audioIcon.style.display = 'block';
+        audioIconMute.style.display = 'none';
+    });
+});
 
     function closePanel(panelId) {
       document.getElementById(panelId).style.display = "none";
