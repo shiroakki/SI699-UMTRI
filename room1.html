@@ -169,7 +169,7 @@ id="ring-desktop"
           
           </a></li>
           <li><a id="audio-toggle" href="#">
-            <img  id="audio-icon" src="Images/audio.png" width="40%" style="display:block">
+            <img  id="audio-icon" src="Images/audio.png" width="50%" style="display:block">
             <button class="tooltip"> AUDIO </button>
             <img id="audio-icon-mute" src="Images/audio-muted.png" width="50%" style="display:none;">
           </a></li>
@@ -218,22 +218,22 @@ id="ring-desktop"
             }
         });
     });
-    
-
+  
+  
       document.addEventListener('DOMContentLoaded', function() {
         const audio = document.getElementById('room-intro');
         const audioToggleButton = document.getElementById('audio-toggle');
     
         // Initially check if audio should be playing or not based on localStorage
-        const shouldPlay = localStorage.getItem('audioEnabled') === 'false';
+        const shouldPlay = localStorage.getItem('audioEnabled') === 'true';
         if (shouldPlay) {
-            audio.pause();
-
-        } else {
           setTimeout(() => {
             audio.play();
         }, 1500);
-
+  
+        } else {
+          audio.pause();
+  
         }
     
         audioToggleButton.addEventListener('click', function(event) {
@@ -249,7 +249,7 @@ id="ring-desktop"
             }
         });
     });
-
+  
 
       document.addEventListener('DOMContentLoaded', function() {
         // Get the A-Frame elements for the rings
